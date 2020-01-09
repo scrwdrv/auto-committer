@@ -6,7 +6,7 @@ let watch = process.argv.indexOf('--watch') > -1 ? true : false,
     watchInterval = watch ? parseInt(process.argv[process.argv.indexOf('--watch') + 1]) || 60 : null,
     errors = 0;
 
-if (watch) console.log('\u001b[2J\u001b[0;0H');
+if (watch) console.log('\u001b[2J\u001b[0;0H\n');
 
 (function exec() {
 
