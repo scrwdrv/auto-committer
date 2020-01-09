@@ -70,8 +70,6 @@ function commit(msg, cb) {
                 return cb();
             else
                 return cb(err);
-        else if (stderr)
-            return cb(stderr);
         childProcess.exec('git push', (err, stdout, stderr) => {
             if (err)
                 return cb(err);
@@ -83,8 +81,6 @@ function detectFiles(cb) {
     childProcess.exec('git add --all', (err, stdout, stderr) => {
         if (err)
             return cb(err);
-        else if (stderr)
-            return cb(stderr);
         cb();
     });
 }
@@ -92,8 +88,6 @@ function getDiffs(cb) {
     childProcess.exec('git diff-index --numstat head', (err, stdout, stderr) => {
         if (err)
             return cb(err);
-        else if (stderr)
-            return cb(stderr);
         else if (!stdout)
             return cb(null);
         let diffs = [], colored = [];

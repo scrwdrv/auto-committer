@@ -68,7 +68,6 @@ function commit(msg: string, cb: (err?: childProcess.ExecException | string) => 
         if (err)
             if (err.code === 1) return cb();
             else return cb(err);
-        else if (stderr) return cb(stderr);
 
         childProcess.exec('git push', (err, stdout, stderr) => {
             if (err) return cb(err);
@@ -80,7 +79,6 @@ function commit(msg: string, cb: (err?: childProcess.ExecException | string) => 
 function detectFiles(cb: (err?: childProcess.ExecException | string) => void) {
     childProcess.exec('git add --all', (err, stdout, stderr) => {
         if (err) return cb(err);
-        else if (stderr) return cb(stderr);
         cb();
     });
 }
@@ -88,7 +86,6 @@ function detectFiles(cb: (err?: childProcess.ExecException | string) => void) {
 function getDiffs(cb: (err: childProcess.ExecException | string, diffs?: string[], colored?: string[]) => void) {
     childProcess.exec('git diff-index --numstat head', (err, stdout, stderr) => {
         if (err) return cb(err);
-        else if (stderr) return cb(stderr);
         else if (!stdout) return cb(null);
 
         let diffs = [], colored = [];
