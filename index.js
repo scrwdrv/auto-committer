@@ -5,7 +5,9 @@ const childProcess = require("child_process");
 const table_1 = require("table");
 let watch = process.argv.indexOf('--watch') > -1 ? true : false, watchInterval = watch ? parseInt(process.argv[process.argv.indexOf('--watch') + 1]) || 60 : null, errors = 0;
 if (watch)
-    console.log('\u001b[2J\u001b[0;0H\n');
+    console.log('\u001b[2J\u001b[0;0H');
+else
+    console.log('');
 (function exec() {
     new Promise((resolve, reject) => {
         const t = Date.now();
