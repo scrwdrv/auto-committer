@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as childProcess from 'child_process';
 import { table, getBorderCharacters } from 'table';
 
