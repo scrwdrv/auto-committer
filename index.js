@@ -61,7 +61,7 @@ function getTime() {
     return time.join(':');
 }
 function commit(msg, cb) {
-    childProcess.exec(`git commit -am "Auto commit @lazy-commit" -m "${msg}"`, (err, stdout, stderr) => {
+    childProcess.exec(`git commit -am "Auto commit @auto-committer" -m "${msg}"`, (err, stdout, stderr) => {
         if (err)
             if (err.code === 1)
                 return cb();
