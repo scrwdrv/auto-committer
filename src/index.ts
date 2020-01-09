@@ -13,10 +13,8 @@ if (watch) console.log('\u001b[2J\u001b[0;0H');
         const t = Date.now();
         detectFiles((err) => {
             if (err) return reject(err);
-            console.log('1')
             getDiffs((err, diffs, colored) => {
                 if (err) return reject(err);
-                console.log('2')
                 if (!diffs) return resolve(), console.log(`\x1b[30m\x1b[1m [${getTime()}] \x1b[34mEverything is up to date\x1b[0m`);
 
                 const n = diffs.length;
