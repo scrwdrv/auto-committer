@@ -1,0 +1,35 @@
+{
+  "name": "auto-committer",
+  "version": "1.0.0",
+  "description": "Tired of writing message for commits and pushing to repository by yourself? Deploy this life changing tool now!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scrwdrv/auto-committer.git"
+  },
+  "keywords": [
+    "cli",
+    "tool",
+    "message",
+    "git",
+    "github",
+    "commit",
+    "push"
+  ],
+  "author": "scrwdrv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scrwdrv/auto-committer/issues"
+  },
+  "homepage": "https://github.com/scrwdrv/auto-committer#readme",
+  "devDependencies": {
+    "@types/node": "^13.1.5",
+    "@types/table": "^4.0.7"
+  },
+  "dependencies": {
+    "table": "^5.4.6"
+  }
+}
