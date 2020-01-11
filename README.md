@@ -18,9 +18,10 @@ auto-committer
 ### Watch Mode
 ```sh
 auto-committer --watch 
-#default check interval: 60 seconds
+# or           -w
+# default check interval: 60 seconds
 ```
 ```sh
 auto-committer --watch 300 
-#check every 300 seconds
+# check every 300 seconds
 ```
