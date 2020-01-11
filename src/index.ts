@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 import * as childProcess from 'child_process';
 import { table, getBorderCharacters } from 'table';
+import cliParams from 'cli-params';
 
-let watch = process.argv.indexOf('--watch') > -1 ? true : false,
-    watchInterval = watch ? parseInt(process.argv[process.argv.indexOf('--watch') + 1]) || 60 : null,
-    errors = 0;
+const param = cliParams([{
+    param: 'watch',
+    type: 'int',
+    optional: true,
+    default: 60,
+    alias: 'w'
+}]);
 
-if (watch) console.log('\u001b[2J\u001b[0;0H');
+let errors = 0;
+
+if (param.watch) console.log('\u001b[2J\u001b[0;0H');
 else console.log('');
 
 (function exec() {
@@ -46,12 +53,12 @@ else console.log('');
         });
     }).then(() => {
         errors = 0;
-        if (watch) setTimeout(exec, watchInterval * 1000);
+        if (param.watch) setTimeout(exec, param.watch * 1000);
     }).catch((err) => {
         errors++;
         if (errors > 10) return console.error(err), console.log('\n\x1b[31m\x1b[1mMax attempts exceeded, exiting ...\x1b[0m');
         console.error(err);
-        if (watch) setTimeout(exec, watchInterval * 1000);
+        if (param.watch) setTimeout(exec, param.watch * 1000);
     });
 
 })();
