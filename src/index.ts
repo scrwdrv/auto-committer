@@ -2,9 +2,8 @@
 import * as childProcess from 'child_process';
 import { table, getBorderCharacters } from 'table';
 import CLIParams from 'cli-params';
-const cliParams = new CLIParams();
 
-cliParams.add({
+new CLIParams().add({
     params: {
         param: 'watch',
         type: 'int',
@@ -12,7 +11,7 @@ cliParams.add({
         default: 60,
         alias: 'w'
     }
-}, () => cliParams.exec((err, param) => exec(param.watch)));
+}).exec((err, param) => exec(param.watch));
 
 function exec(watch: number) {
     let errors = 0;

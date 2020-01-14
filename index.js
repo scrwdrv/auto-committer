@@ -4,8 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const childProcess = require("child_process");
 const table_1 = require("table");
 const cli_params_1 = require("cli-params");
-const cliParams = new cli_params_1.default();
-cliParams.add({
+new cli_params_1.default().add({
     params: {
         param: 'watch',
         type: 'int',
@@ -13,7 +12,7 @@ cliParams.add({
         default: 60,
         alias: 'w'
     }
-}, () => cliParams.exec((err, param) => exec(param.watch)));
+}).exec((err, param) => exec(param.watch));
 function exec(watch) {
     let errors = 0;
     if (watch)
