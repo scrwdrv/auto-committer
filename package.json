@@ -1,6 +1,6 @@
 {
   "name": "auto-committer",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Tired of writing message for commits and pushing to repository by yourself? Deploy this life changing tool now!",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "@types/table": "^4.0.7"
   },
   "dependencies": {
-    "cli-params": "^1.2.0",
+    "cli-params": "^1.2.1",
     "table": "^5.4.6"
   }
 }
