@@ -4,19 +4,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const childProcess = require("child_process");
 const table_1 = require("table");
 const cli_params_1 = require("cli-params");
-const param = cli_params_1.default([{
+const cliParams = new cli_params_1.default();
+cliParams.add({
+    params: {
         param: 'watch',
         type: 'int',
         optional: true,
         default: 60,
         alias: 'w'
-    }]);
-let errors = 0;
-if (param.watch)
-    console.log('\u001b[2J\u001b[0;0H');
-else
-    console.log('');
-(function exec() {
+    }
+}, () => cliParams.exec((err, param) => exec(param.watch)));
+function exec(watch) {
+    let errors = 0;
+    if (watch)
+        console.log('\u001b[2J\u001b[0;0H');
+    else
+        console.log('');
     new Promise((resolve, reject) => {
         const t = Date.now();
         detectFiles((err) => {
@@ -53,17 +56,17 @@ else
         });
     }).then(() => {
         errors = 0;
-        if (param.watch)
-            setTimeout(exec, param.watch * 1000);
+        if (watch)
+            setTimeout(exec, watch * 1000);
     }).catch((err) => {
         errors++;
         if (errors > 10)
             return console.error(err), console.log('\n\x1b[31m\x1b[1mMax attempts exceeded, exiting ...\x1b[0m');
         console.error(err);
-        if (param.watch)
-            setTimeout(exec, param.watch * 1000);
+        if (watch)
+            setTimeout(exec, watch * 1000);
     });
-})();
+}
 function getTime() {
     const now = new Date(), time = [now.getHours().toString(), now.getMinutes().toString(), now.getSeconds().toString()];
     for (let i = time.length; i--;)

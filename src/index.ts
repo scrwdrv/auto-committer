@@ -1,22 +1,24 @@
 #!/usr/bin/env node
 import * as childProcess from 'child_process';
 import { table, getBorderCharacters } from 'table';
-import cliParams from 'cli-params';
+import CLIParams from 'cli-params';
+const cliParams = new CLIParams();
 
-const param = cliParams([{
-    param: 'watch',
-    type: 'int',
-    optional: true,
-    default: 60,
-    alias: 'w'
-}]);
+cliParams.add({
+    params: {
+        param: 'watch',
+        type: 'int',
+        optional: true,
+        default: 60,
+        alias: 'w'
+    }
+}, () => cliParams.exec((err, param) => exec(param.watch)));
 
-let errors = 0;
+function exec(watch: number) {
+    let errors = 0;
 
-if (param.watch) console.log('\u001b[2J\u001b[0;0H');
-else console.log('');
-
-(function exec() {
+    if (watch) console.log('\u001b[2J\u001b[0;0H');
+    else console.log('');
 
     new Promise((resolve, reject) => {
         const t = Date.now();
@@ -53,15 +55,14 @@ else console.log('');
         });
     }).then(() => {
         errors = 0;
-        if (param.watch) setTimeout(exec, param.watch * 1000);
+        if (watch) setTimeout(exec, watch * 1000);
     }).catch((err) => {
         errors++;
         if (errors > 10) return console.error(err), console.log('\n\x1b[31m\x1b[1mMax attempts exceeded, exiting ...\x1b[0m');
         console.error(err);
-        if (param.watch) setTimeout(exec, param.watch * 1000);
+        if (watch) setTimeout(exec, watch * 1000);
     });
-
-})();
+}
 
 function getTime() {
     const now = new Date(),
