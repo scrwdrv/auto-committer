@@ -11,7 +11,10 @@ new CLIParams().add({
         default: 60,
         alias: 'w'
     }
-}).exec((err, param) => exec(param.watch));
+}).exec((err, param) => {
+    if (err) return console.error(err);
+    exec(param.watch);
+});
 
 function exec(watch: number) {
     let errors = 0;
@@ -54,12 +57,12 @@ function exec(watch: number) {
         });
     }).then(() => {
         errors = 0;
-        if (watch) setTimeout(exec, watch * 1000);
+        if (watch) setTimeout(exec, watch * 1000, watch);
     }).catch((err) => {
         errors++;
         if (errors > 10) return console.error(err), console.log('\n\x1b[31m\x1b[1mMax attempts exceeded, exiting ...\x1b[0m');
         console.error(err);
-        if (watch) setTimeout(exec, watch * 1000);
+        if (watch) setTimeout(exec, watch * 1000, watch);
     });
 }
 

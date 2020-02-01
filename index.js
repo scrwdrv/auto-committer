@@ -12,7 +12,11 @@ new cli_params_1.default().add({
         default: 60,
         alias: 'w'
     }
-}).exec((err, param) => exec(param.watch));
+}).exec((err, param) => {
+    if (err)
+        return console.error(err);
+    exec(param.watch);
+});
 function exec(watch) {
     let errors = 0;
     if (watch)
@@ -56,14 +60,14 @@ function exec(watch) {
     }).then(() => {
         errors = 0;
         if (watch)
-            setTimeout(exec, watch * 1000);
+            setTimeout(exec, watch * 1000, watch);
     }).catch((err) => {
         errors++;
         if (errors > 10)
             return console.error(err), console.log('\n\x1b[31m\x1b[1mMax attempts exceeded, exiting ...\x1b[0m');
         console.error(err);
         if (watch)
-            setTimeout(exec, watch * 1000);
+            setTimeout(exec, watch * 1000, watch);
     });
 }
 function getTime() {
