@@ -1,6 +1,6 @@
 {
   "name": "auto-committer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Tired of writing message for commits and pushing to repository by yourself? Deploy this life changing tool now!",
   "main": "index.js",
   "scripts": {

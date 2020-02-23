@@ -47,7 +47,10 @@ function exec(watch: number) {
                 for (let i = 0, l = diffs.length; i < l; i++)
                     msg.push(`[${diffs[i][0]}](${diffs[i][1]})(${diffs[i][2]})`);
 
-                commit(`${n} file${n > 1 ? 's' : ''} Modified: ${msg.join(', ')}`, (err) => {
+                let description = `${n} file${n > 1 ? 's' : ''} Modified: ${msg.join(', ')}`;
+                if (description.length > 255) description = description.slice(0, 255) + '...';
+
+                commit(description, (err) => {
                     if (err) return reject(err);
                     console.log('\n' + arr.join('\n'));
                     console.log(`\n\x1b[30m\x1b[1m [${getTime()}] \x1b[34m${n} file${n > 1 ? 's' : ''} committed in ${((Date.now() - t) / 1000).toFixed(2)} secs\x1b[0m`);
